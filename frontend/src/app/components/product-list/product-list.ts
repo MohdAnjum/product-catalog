@@ -179,4 +179,10 @@ export class ProductListComponent implements OnInit {
     this.currentPage.set(event.pageIndex + 1); // MatPaginator uses 0-based index
     this.fetchProducts();
   }
+
+    // Utility function to capitalize first letter (used in UI display of color names)
+  capitalizeFirstLetter(color: string): string {
+    if (!color) return '';
+    return color.charAt(0).toUpperCase() + color.slice(1);
+  }
 }

@@ -112,7 +112,7 @@ router.get('/', async (req, res) => {
     // 📦 Execute query and count in parallel for performance
     const [products, total] = await Promise.all([
       Product.find(query)
-        .select('name price brand categories imageUrl description') // Return only needed fields
+        .select('name price brand categories imageUrl description attributes.color') // Return only needed fields
         .sort(sortObj)
         .skip(skip)
         .limit(limitNum)

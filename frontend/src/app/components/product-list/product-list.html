@@ -50,32 +50,32 @@
 
       <!-- Render product cards when products are available -->
       <ng-container *ngIf="!loading() && products().length > 0; else noProductsTemplate">
-        <div
-          *ngFor="let product of products()"
-          class="product-card"
-          tabindex="0"
-          role="button"
-          [attr.aria-label]="product.name"
-        >
-          <!-- Product image -->
-          <img
-            [src]="getBrandImage(product.brand)"
-            alt="{{ product.name }}"
-            class="product-image"
-          />
+  <div *ngFor="let product of products()" class="product-card" tabindex="0" role="button" [attr.aria-label]="product.name">
 
-          <!-- Product info -->
-          <h4 class="product-name">{{ product.name }}</h4>
-          <p class="product-brand">{{ product.brand }}</p>
-          <p class="product-price">{{ product.price | currency }}</p>
+    <!-- Product image -->
+    <img [src]="getBrandImage(product.brand)" alt="{{ product.name }}" class="product-image" />
+
+    <!-- Product info -->
+    <h4 class="product-name">{{ product.name }}</h4>
+    <p class="product-brand">{{ product.brand }}</p>
+    <p class="product-price">{{ product.price | currency }}</p>
+
     <p class="product-categories">
-  <span *ngFor="let cat of product.categories" class="category-tag">{{ cat }}</span>
-</p>
+      <span *ngFor="let cat of product.categories" class="category-tag">{{ cat }}</span>
+    </p>
+    
+    <!-- Display color -->
+    <p class="product-color">
+      Color: 
+       <span class="color-badge">
+    {{ capitalizeFirstLetter(product.attributes?.['color']) }}
+  </span>
+    </p>
 
+    <p class="product-description">{{ product.description }}</p>
+  </div>
+</ng-container>
 
-          <p class="product-description">{{ product.description }}</p>
-        </div>
-      </ng-container>
 
       <!-- Fallback template when no products are found -->
       <ng-template #noProductsTemplate>
