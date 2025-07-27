@@ -1,0 +1,9 @@
+http://localhost:3000/api/products?search=Home&brand=Samsung
+
+http://localhost:3000/api/products?search=shirt&brand=Nike,Adidas&categories=Clothing&price_min=500&price_max=1500&page=1&limit=5
+
+http://localhost:3000/api/products?search=brand=Nike,Adidas
+
+http://localhost:3000/api/products?brand=Nike,Adidas  (working)
+http://localhost:3000/api/products?brand=Nike,Adidas&categories=Apparel (working)
+http://localhost:3000/api/products?search=shirt
