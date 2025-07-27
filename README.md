@@ -1,3 +1,11 @@
+please add .env
+
+# .env file
+PORT=3000
+MONGO_URI=mongodb://localhost:27017/catalogdb
+JWT_SECRET=your-secret-key-here
+NODE_ENV=development
+
 Certainly! Here is a compiled **README.md** file tailored specifically for your full project—which includes both your **Backend Node.js server** and **Frontend Angular app**—based on the information from your assignments and conversation. You can copy this and use it directly in your project root.
 
 # Advanced Product Catalog Application
