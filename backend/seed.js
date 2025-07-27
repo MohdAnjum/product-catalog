@@ -1,17 +1,17 @@
-// ✅ Import Mongoose to interact with MongoDB
+//  Import Mongoose to interact with MongoDB
 const mongoose = require('mongoose');
 
-// ✅ Import Faker to generate fake but realistic product data
+//  Import Faker to generate fake but realistic product data
 const faker = require('faker');
 
-// ✅ Connect to MongoDB
+//  Connect to MongoDB
 // Note: Use environment variables for DB URL in production
 mongoose.connect('mongodb://localhost:27017/catalogdb', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
 
-// ✅ Define Mongoose schema to structure the product documents
+//  Define Mongoose schema to structure the product documents
 const productSchema = new mongoose.Schema({
   name: String,                // Product name (e.g., "Nike Air Max")
   description: String,         // Product description
@@ -27,21 +27,21 @@ const productSchema = new mongoose.Schema({
   }
 });
 
-// ✅ Create a model from the schema
+//  Create a model from the schema
 const Product = mongoose.model('Product', productSchema);
 
-// ✅ Sample brand and category data
+//  Sample brand and category data
 const brands = ["Sony", "Samsung", "Nike", "HP", "Apple", "LG", "Adidas"];
 const categoriesList = ["Electronics", "Books", "Apparel", "Home", "Kitchen", "Fitness"];
 
-// ✅ Async function to seed the database with 1200 products
+//  Async function to seed the database with 1200 products
 async function seed() {
-  // ✅ Clean the collection to avoid duplicates
+  //  Clean the collection to avoid duplicates
   await Product.deleteMany({});
 
   const products = [];
 
-  // ✅ Generate 1200 fake product objects
+  //  Generate 1200 fake product objects
   for (let i = 0; i < 1200; i++) {
     products.push({
       name: faker.commerce.productName(), // Fake product name
@@ -62,13 +62,13 @@ async function seed() {
     });
   }
 
-  // ✅ Insert all generated products into MongoDB
+  //  Insert all generated products into MongoDB
   await Product.insertMany(products);
 
-  // ✅ Log success message and disconnect from DB
-  console.log('✅ Inserted 1200 demo products.');
+  //  Log success message and disconnect from DB
+  console.log(' Inserted 1200 demo products.');
   mongoose.disconnect();
 }
 
-// ✅ Run the seed function
+//  Run the seed function
 seed();

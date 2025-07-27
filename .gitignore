@@ -1,4 +1,4 @@
-# .gitignore example
+# .gitignore example anjum
 backend/node_modules/
 frontend/node_modules/
 dist/
