@@ -1,0 +1,109 @@
+<!-- Main container for the catalog UI -->
+<div class="container">
+
+  <!-- Sidebar component for filters. Emits updated filters via `filtersChanged` event. -->
+  <app-filter-sidebar
+    (filtersChanged)="onFiltersChanged($event)"
+    class="sidebar"
+    [class.disabled]="loading()"
+  ></app-filter-sidebar>
+
+  <!-- Main content area which gets visually disabled when `loading()` returns true -->
+  <div class="main-content" [class.disabled]="loading()">
+
+    <!-- Search bar and sorting dropdown -->
+    <div class="search-sort-bar">
+      <!-- Live search input field for name & description -->
+      <input
+        #searchInput
+        type="text"
+        placeholder="Search products by Name & Description..."
+        (input)="onSearchChange($event)"
+        class="search-input"
+        [disabled]="loading()"
+      />
+
+      <!-- Sorting dropdown -->
+      <label for="sort-select" class="visually-hidden">Sort by</label>
+      <select
+        id="sort-select"
+        [value]="sortOption()"
+        (change)="onSortChange($event)"
+        class="sort-select"
+        [disabled]="loading()"
+      >
+        <option value="relevance">Relevance</option>
+        <option value="price_asc">Price: Low to High</option>
+        <option value="price_desc">Price: High to Low</option>
+        <option value="name_asc">Name: A-Z</option>
+        <option value="name_desc">Name: Z-A</option>
+      </select>
+    </div>
+
+    <!-- Product list grid -->
+    <div class="product-grid">
+
+      <!-- Loading state message -->
+      <ng-container *ngIf="loading()">
+        <p class="loading-text">Loading products...</p>
+      </ng-container>
+
+      <!-- Render product cards when products are available -->
+      <ng-container *ngIf="!loading() && products().length > 0; else noProductsTemplate">
+        <div
+          *ngFor="let product of products()"
+          class="product-card"
+          tabindex="0"
+          role="button"
+          [attr.aria-label]="product.name"
+        >
+          <!-- Product image -->
+          <img
+            [src]="getBrandImage(product.brand)"
+            alt="{{ product.name }}"
+            class="product-image"
+          />
+
+          <!-- Product info -->
+          <h4 class="product-name">{{ product.name }}</h4>
+          <p class="product-brand">{{ product.brand }}</p>
+          <p class="product-price">{{ product.price | currency }}</p>
+    <p class="product-categories">
+  <span *ngFor="let cat of product.categories" class="category-tag">{{ cat }}</span>
+</p>
+
+
+          <p class="product-description">{{ product.description }}</p>
+        </div>
+      </ng-container>
+
+      <!-- Fallback template when no products are found -->
+      <ng-template #noProductsTemplate>
+        <div class="no-products-container">
+          <img
+            src="assets/no-products-found.jpg"
+            alt="No products found"
+            class="no-products-image"
+          />
+          <p class="no-products-text">No products found matching your criteria.</p>
+        </div>
+      </ng-template>
+    </div>
+
+    <!-- Footer paginator for navigating large sets of products -->
+    <footer class="footer-paginator">
+      <mat-paginator
+        [pageSizeOptions]="[50]"
+        [length]="totalProducts()"
+        (page)="onPageEvent($event)"
+        [pageSize]="itemsPerPage"
+        showFirstLastButtons
+      ></mat-paginator>
+    </footer>
+  </div>
+
+  <!-- Optional fullscreen overlay spinner shown during loading -->
+  <div *ngIf="loading()" class="overlay">
+    <div class="spinner"></div>
+  </div>
+</div>

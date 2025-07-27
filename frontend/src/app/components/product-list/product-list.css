@@ -1,0 +1,319 @@
+.container {
+  display: flex;
+  gap: 20px;
+  padding: 16px;
+  font-family: Arial, sans-serif;
+}
+
+.sidebar {
+  width: 280px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  background-color: #fafafa;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-sort-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  /* high enough to stay on top */
+  background-color: white;
+  /* or your page bg color */
+  padding: 12px 16px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+
+  /* Optional shadow for better visibility */
+  box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+}
+
+
+.search-input {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 1.5px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #007BFF;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
+}
+
+.sort-select {
+  padding: 8px 10px;
+  font-size: 1rem;
+  border: 1.5px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: white;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.product-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgb(0 0 0 / 0.15);
+}
+
+.product-image {
+  width: 100%;
+  height: 160px;
+  object-fit: contain;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+}
+
+.product-name {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.product-brand {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 8px;
+  font-style: italic;
+}
+
+.product-price {
+  font-size: 1.05rem;
+  color: #007BFF;
+  font-weight: 600;
+  margin-top: auto;
+}
+
+.pagination {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.pagination button {
+  background-color: white;
+  border: 1px solid #ccc;
+  margin: 0 4px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination button:not(:disabled):hover {
+  background-color: #007BFF;
+  color: white;
+  border-color: #007BFF;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+}
+
+/* Disable interactions when loading */
+.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+  user-select: none;
+}
+
+/* Full screen semi-transparent overlay */
+.overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  /* or absolute inside container if preferred */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.6);
+  z-index: 9999;
+}
+
+/* Simple CSS spinner */
+.spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #007bff;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Optional: adjust loading text style when shown */
+.loading-text {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  margin-top: 60px;
+}
+
+.no-products-image {
+  max-width: 100%;
+  /* Image won't exceed container width */
+  max-height: 200px;
+  /* Optional max height (adjust as needed) */
+  width: auto;
+  /* Maintain aspect ratio */
+  height: auto;
+  object-fit: contain;
+  /* Ensure whole image fits inside */
+  margin-bottom: 20px;
+  user-select: none;
+}
+
+.no-products-container {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  color: #555;
+}
+
+.no-products-image {
+  max-width: 100%;
+  max-height: 200px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 20px;
+  user-select: none;
+}
+
+.no-products-text {
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.footer-paginator {
+  position: fixed;
+  /* Fix at bottom of viewport */
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  background: #fff;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.07);
+  padding: 12px 0 8px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+mat-paginator {
+  background: transparent;
+}
+
+@media (max-width: 600px) {
+  .footer-paginator {
+    padding: 4px 0 2px 0;
+  }
+
+  mat-paginator {
+    font-size: 1rem;
+  }
+}
+
+/* To avoid content hiding behind the fixed paginator, add bottom padding to main content: */
+.main-content {
+  padding-bottom: 68px;
+  /* at least the height of your paginator + a little extra */
+}
+.product-categories {
+  margin: 6px 0;
+  font-style: italic;
+  color: #555;
+}
+
+.category-tag {
+  display: inline-block;
+  background-color: #e0f0ff; /* Light blue bg */
+  color: #007bff;            /* Blue text */
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  cursor: default;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+.category-tag:hover {
+  background-color: #cce6ff;
+}
+
+.product-description {
+  display: -webkit-box;            /* creates a flexbox box in webkit */
+  -webkit-box-orient: vertical;    /* vertical layout */
+  -webkit-line-clamp: 2;           /* limit to 2 lines (webkit only) */
+
+  /* standard property with fallback */
+  line-clamp: 2;                   /* standard */
+  box-orient: vertical;            /* standard, currently not widely supported */
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  max-height: 3em;                 /* approx (line-height * 2) */
+  line-height: 1.5em;
+}
+

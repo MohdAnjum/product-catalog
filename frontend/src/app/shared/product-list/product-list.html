@@ -1,0 +1,14 @@
+<ng-container *ngIf="!loading && products.length > 0; else noProductsTemplate">
+  <div *ngFor="let product of products" class="product-card" tabindex="0" role="button"
+       [attr.aria-label]="product.name">
+    <img [src]="getBrandImage(product.brand)" alt="{{ product.name }}" class="product-image" />
+    <h4 class="product-name">{{ product.name }}</h4>
+    <p class="product-brand">{{ product.brand }}</p>
+    <p class="product-price">{{ product.price | currency }}</p>
+    <p class="product-description">{{ product.description }}</p>
+  </div>
+</ng-container>
+
+<ng-template #noProductsTemplate>
+  <p>No products available.</p>
+</ng-template>

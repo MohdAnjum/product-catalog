@@ -1,0 +1,84 @@
+<!-- Sidebar container for product filters -->
+<div class="filter-sidebar">
+
+  <!-- Section for Category filters -->
+  <div class="filter-section">
+    <h3 class="filter-title">Categories</h3>
+    <div class="filter-options">
+      <!-- Iterate over each category and show checkbox -->
+      <div *ngFor="let cat of categories" class="filter-option">
+        <!-- 
+          Checkbox is checked if the category exists in selectedCategories Set.
+          On change, it triggers toggleCategory() to add/remove the selected category.
+        -->
+        <input type="checkbox" [id]="'cat-'+cat" (change)="toggleCategory(cat)"
+          [checked]="selectedCategories.has(cat)" />
+        <label [for]="'cat-'+cat">{{ cat }}</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section for Brand filters -->
+  <div class="filter-section">
+    <h3 class="filter-title">Brands</h3>
+    <div class="filter-options">
+      <!-- Iterate over each brand and display checkbox -->
+      <div *ngFor="let brand of brands" class="filter-option">
+        <!-- 
+          Checkbox is checked if brand is in selectedBrands Set.
+          toggleBrand() updates the Set based on user interaction.
+        -->
+        <input type="checkbox" [id]="'brand-'+brand" (change)="toggleBrand(brand)"
+          [checked]="selectedBrands.has(brand)" />
+        <label [for]="'brand-'+brand">{{ brand }}</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section for Color filters -->
+  <div class="filter-section">
+    <h3 class="filter-title">Colors</h3>
+    <div class="filter-options">
+      <!-- Iterate over each color and show a checkbox with capitalized label -->
+      <div *ngFor="let color of colors" class="filter-option">
+        <!-- 
+          Checkbox is checked if color exists in selectedColors Set.
+          toggleColor() adds/removes color based on interaction.
+        -->
+        <input type="checkbox" [id]="'color-'+color" (change)="toggleColor(color)"
+          [checked]="selectedColors.has(color)" />
+        <!-- Capitalizing first letter for better display UX -->
+        <label [for]="'color-'+color">{{ capitalizeFirstLetter(color) }}</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section for setting minimum and maximum price range -->
+  <div class="filter-section">
+    <h3 class="filter-title">Price Range</h3>
+    <div class="price-range">
+      <!-- Input for minimum price -->
+      <label>
+        Min:
+        <input type="number" min="0" [(ngModel)]="minPrice" (ngModelChange)="onMinPriceChange($event)"
+          placeholder="0" />
+      </label>
+      <!-- Input for maximum price -->
+      <label>
+        Max:
+        <input type="number" min="0" [(ngModel)]="maxPrice" (ngModelChange)="onMaxPriceChange($event)"
+          placeholder="Any" />
+      </label>
+    </div>
+  </div>
+
+  <!-- Clear all filters at once -->
+  <div class="filter-section clear-filters-section">
+    <button type="button" (click)="clearFilters()" class="clear-filters-button" aria-label="Clear all selected filters">
+      <!-- Icon for better accessibility -->
+      <span aria-hidden="true" class="clear-filters-icon">✖</span>
+      Clear All Filters
+    </button>
+  </div>
+
+</div>
