@@ -6,11 +6,12 @@ import { FilterSidebarComponent, ProductFilters } from '../filter-sidebar/filter
 import { debounceTime, Subject } from 'rxjs';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { PageEvent } from '@angular/material/paginator';
+import { ProductCardComponent } from '../product-card/product-card';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, FilterSidebarComponent, MatPaginatorModule],
+  imports: [CommonModule, FormsModule, FilterSidebarComponent, MatPaginatorModule,ProductCardComponent],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css'
 })

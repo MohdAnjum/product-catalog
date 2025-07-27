@@ -1,0 +1,21 @@
+<div class="product-card" tabindex="0" role="button" [attr.aria-label]="product.name">
+  <!-- Product image -->
+  <img [src]="brandImageUrl" alt="{{ product.name }}" class="product-image" />
+
+  <!-- Product info -->
+  <h4 class="product-name">{{ product.name }}</h4>
+  <p class="product-brand">{{ product.brand }}</p>
+  <p class="product-price">{{ product.price | currency }}</p>
+
+  <p class="product-categories">
+    <span *ngFor="let cat of product.categories" class="category-tag">{{ cat }}</span>
+  </p>
+
+  <!-- Display color -->
+  <p class="product-color">
+    Color:
+    <span class="color-badge">{{ capitalizeFirstLetter(product.attributes?.['color']) }}</span>
+  </p>
+
+  <p class="product-description">{{ product.description }}</p>
+</div>
